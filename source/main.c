@@ -13,9 +13,6 @@
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
-unsigned short MAX = 255;
-unsigned short x = 0x00;
-unsigned short oneled = MAX/8;
 void ADC_init() {
     ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1<< ADATE);
 }
@@ -29,8 +26,12 @@ int main(void) {
 
     /* Insert your solution below */
     while (1) {
-	x = ADC;
-        unsigned char tmpB = (char)x; 
+
+	unsigned long  MAX = 767;
+	unsigned long x = 0x00;
+	unsigned long  oneled = MAX/8;
+    	    x = ADC;
+        unsigned long tmpB = (long)x; 
 	if(tmpB <= oneled){
 		PORTB = 0x01;
 	}else if(tmpB <= oneled * 2){
